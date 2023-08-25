@@ -1,9 +1,10 @@
+// osat 1, tehtävät 1.3 - 1.5
 const Header = (props) => {
+  console.log(props)
   return (
     <h1>{props.title}</h1>
   )
 }
-
 const Content = (props) => {
   return (
     <p>
@@ -11,13 +12,11 @@ const Content = (props) => {
     </p>
   )
 }
-
 const Total = (props) => {
   return (
     <p>Number of exercises {props.ex1 + props.ex2 + props.ex3}</p>
   )
 }
-
 const App = () => {
   const course = 'Half Stack application development'
   const part1 = {
