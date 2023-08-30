@@ -11,16 +11,22 @@ const Header = ({title}) => {
 const Statistics =({g, n, b}) => {
 
   const all = g + n + b
-  const average = all < 1 ? 0 : (g + (0-b)) / all
-  
+  if( all != 0) {
+    const average = all < 1 ? 0 : (g + (0-b)) / all
+    
+    return (
+      <div>
+        <p>good {g}</p>
+        <p>neutral {n}</p>
+        <p>bad {b}</p>
+        <p>all {all}</p>
+        <p>average {average}</p>
+      </div>
+    )
+  }
+
   return (
-    <div>
-      <p>good {g}</p>
-      <p>neutral {n}</p>
-      <p>bad {b}</p>
-      <p>all {all}</p>
-      <p>average {average}</p>
-    </div>
+    <p>No feedback given</p>
   )
 }
 
