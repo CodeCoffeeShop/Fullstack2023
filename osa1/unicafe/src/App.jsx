@@ -18,7 +18,10 @@ const Button = (props) => {
 
 const StatisticLine = (props) => {
   return (
-    <p>{props.name} {props.value}</p>
+    <tr>
+      <td>{props.name}</td>
+      <td>{props.value}</td>
+    </tr>
   )
 }
 
@@ -29,11 +32,15 @@ const Statistics =({g, n, b}) => {
     const average = all < 1 ? 0 : (g + (0-b)) / all
     return (
       <div>
-        <StatisticLine name="good" value={g} />
-        <StatisticLine name="neutral" value={n} />
-        <StatisticLine name="bad" value={b} />
-        <StatisticLine name="all" value={all} />
-        <StatisticLine name="average" value={average} />
+        <table>
+          <tbody>
+            <StatisticLine name="good" value={g} />
+            <StatisticLine name="neutral" value={n} />
+            <StatisticLine name="bad" value={b} />
+            <StatisticLine name="all" value={all} />
+            <StatisticLine name="average" value={average} />
+          </tbody>
+        </table>
       </div>
     )
   }
