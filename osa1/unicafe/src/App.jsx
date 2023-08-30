@@ -8,19 +8,32 @@ const Header = ({title}) => {
   )
 }
 
+const Button = (props) => {
+  return (
+    <button onClick={props.hC}>
+      {props.text}
+    </button>
+  )
+}
+
+const StatisticLine = (props) => {
+  return (
+    <p>{props.name} {props.value}</p>
+  )
+}
+
 const Statistics =({g, n, b}) => {
 
   const all = g + n + b
   if( all != 0) {
     const average = all < 1 ? 0 : (g + (0-b)) / all
-    
     return (
       <div>
-        <p>good {g}</p>
-        <p>neutral {n}</p>
-        <p>bad {b}</p>
-        <p>all {all}</p>
-        <p>average {average}</p>
+        <StatisticLine name="good" value={g} />
+        <StatisticLine name="neutral" value={n} />
+        <StatisticLine name="bad" value={b} />
+        <StatisticLine name="all" value={all} />
+        <StatisticLine name="average" value={average} />
       </div>
     )
   }
@@ -28,6 +41,7 @@ const Statistics =({g, n, b}) => {
   return (
     <p>No feedback given</p>
   )
+
 }
 
 const App = () => {
@@ -35,21 +49,15 @@ const App = () => {
   const [good, setGood] = useState(0)
   const [neutral, setNeutral] = useState(0)
   const [bad, setBad] = useState(0)
-  console.log(good, neutral, bad)
+  //console.log(good, neutral, bad)
 
   return (
     <div>
       <Header title={"give feedback"} />
     
-      <button onClick={() => setGood(good + 1)}>
-        good
-      </button>
-      <button onClick={() => setNeutral(neutral + 1)}>
-        neutral
-      </button>
-      <button onClick={() => setBad(bad + 1)}>
-        bad
-      </button>
+      <Button hC={() => setGood(good + 1)} text="good" />
+      <Button hC={() => setNeutral(neutral + 1)} text="neutral" />
+      <Button hC={() => setBad(bad + 1)} text="bad" />
 
       <Header title={"statistics"} />
 
