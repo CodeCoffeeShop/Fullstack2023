@@ -14,6 +14,26 @@ const Title = ({text}) => {
   )
 }
 
+const Mostvotes = (props) => {
+  const points=props.pnt
+  const max = points.indexOf(Math.max(...points))
+  
+  if(points[max] > 0) {
+    return (
+      <div>
+        <p>{props.anecd[max]}</p>
+        <p>has {points[max]} points</p>
+      </div>
+    )
+  }
+
+  return (
+    <div>
+      <p>No votes yet!</p>
+    </div>
+  )
+}
+
 const App = () => {
   const anecdotes = [
     'If it hurts, do it more often.',
@@ -33,10 +53,6 @@ const App = () => {
   const getAnecdote = () => {
     setSelected(Math.floor(Math.random() * anecdotes.length))
   }
-  
-  
-  let max = Math.max(...points)
-  max = points.indexOf(max)
 
   const voteAnecdote = () => {
     console.log(selected)
@@ -64,10 +80,8 @@ const App = () => {
       </p>
       
       <Title text="Anecdote with most votes" />
-      <p>
-        {anecdotes[max]}
-      </p>
-      <p>has {points[max]} points</p>
+      
+      <Mostvotes anecd={anecdotes} pnt={points}/>
       
     </div>
   )
