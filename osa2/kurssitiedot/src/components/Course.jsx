@@ -17,8 +17,6 @@ return (
     {courses}
     <Total exerc={cont} />
     </>
-
-    
 )
 }
 const Total = ({exerc}) => {
@@ -43,7 +41,6 @@ return (
             <Content cont={course.parts}/>
         </div>
         )
-    
     })}
     </div>
 )

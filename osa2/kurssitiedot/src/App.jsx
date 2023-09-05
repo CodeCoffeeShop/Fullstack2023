@@ -45,6 +45,22 @@ const App = () => {
           id: 2
         }
       ]
+    },
+    {
+      name: 'Vue.js',
+      id: 3,
+      parts: [
+        {
+          name: 'Routing',
+          exercises: 3,
+          id: 1
+        },
+        {
+          name: 'Middlewares',
+          exercises: 7,
+          id: 2
+        }
+      ]
     }
   ]
 
