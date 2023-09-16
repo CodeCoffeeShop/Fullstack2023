@@ -9,7 +9,7 @@ const Filter = (props) => {
 
 const Title = ({title}) => {
   return (
-    <h2>{title}</h2>
+    <h2 className='title'>{title}</h2>
   )
 }
 
@@ -51,12 +51,36 @@ const Numbers = ({nums, filter, oC}) => {
   )
 }
 
+const Notification = (props) => {
+  console.log(props)
+  if (props.info === null && props.error === null) {
+    return null
+  }
+
+  if(props.info) {
+    return (
+      <div className="infoGreen">
+        {props.info}
+      </div>
+    )
+  }
+  if(props.error) {
+    return (
+      <div className="infoRed">
+        {props.error}
+      </div>
+    )
+  }
+}
+
 const App = () => {
   const [persons, setPersons] = useState([]) 
   const [newName, setNewName] = useState('')
   const [newNumber, setNewNumber] = useState('')
   const [newFilter, setNewFilter] = useState('')
-  
+  const [infoMessage, setInfoMessage] = useState(null)
+  const [errorMessage, setErrorMessage] = useState(null)
+
   const hook = () => {
     numberService
       .getAll()
@@ -82,6 +106,10 @@ const App = () => {
           .then(returnedPerson => {
             console.log(returnedPerson)
             setPersons(persons.map(person => person.id !== getPerson.id ? person : returnedPerson))
+            setInfoMessage(`Number has been changed for ${newName}!`)
+              setTimeout(() => {
+                setInfoMessage(null)
+              }, 5000)
           })
       }
     } else {
@@ -90,6 +118,10 @@ const App = () => {
         .create(nameObject)
         .then(returnedPerson => {
           setPersons(persons.concat(returnedPerson))
+          setInfoMessage(`Added ${newName}`)
+            setTimeout(() => {
+              setInfoMessage(null)
+            }, 5000)
           setNewName('')
           setNewNumber('')
         })
@@ -123,13 +155,25 @@ const App = () => {
 
   const deleteName = (id, name) => () => {
     if (window.confirm("Delete " + name + "?")) {
-      //console.log(id)
+      console.log(id)
       numberService
         .deletePerson(id)
         .then(returnedPerson => {
           console.log(returnedPerson)
           setPersons(persons.filter((person) => person.id !== id))
-        }) 
+          setErrorMessage(`Deleted ${name}`)
+            setTimeout(() => {
+              setErrorMessage(null)
+            }, 5000)
+        })
+        .catch(error => {
+          console.log(error.message)
+          setPersons(persons.filter((person) => person.id !== id))
+          setErrorMessage(`Information of ${name} has already been removed from server!`)
+            setTimeout(() => {
+              setErrorMessage(null)
+            }, 5000)
+        })
     }
   }
 
@@ -140,7 +184,9 @@ const App = () => {
 
       <Filter search={newFilter} handler={handleFilter} />
       
-      <Title title='add new' />
+      <Title title='Add new' />
+
+      <Notification info={infoMessage} error={errorMessage} />
 
       <PersonForm oS={addName} nName={newName} nNumber={newNumber} oC={[handleNameChange, handleNumberChange]} btnTxt={'add'} />
 

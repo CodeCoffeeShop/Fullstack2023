@@ -11,14 +11,19 @@
       "id": 9
     },
     {
-      "name": "Gert Salvet",
-      "number": "113",
-      "id": 10
-    },
-    {
       "name": "Ada Lovelace",
       "number": "12491287214",
       "id": 11
+    },
+    {
+      "name": "Kris Kaelep",
+      "number": "223",
+      "id": 16
+    },
+    {
+      "name": "Gert Salvet",
+      "number": "123",
+      "id": 17
     }
   ]
 }
